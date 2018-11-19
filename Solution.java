@@ -291,10 +291,45 @@ class Solution {
 /*
 	public static void main(String args[]){
 //		System.out.println(letterCombinations("1"));
-		System.out.println(letterCombinations("2"));
-		System.out.println(letterCombinations("23"));
-		System.out.println(letterCombinations("456"));
+		System.out.println(letterCombinations3("2"));
+		System.out.println(letterCombinations3("23")); //{a,b,c}->{b,c,ad,ae,af}->{c,ad,ae,af,bd,be,bf}->{ad,ae,af,bd,be,bf,cd,ce,cf}
+		System.out.println(letterCombinations3("456"));
 	}*/
+	public static List<String> letterCombinations3(String digits) {
+
+		if(digits.isEmpty() || digits.indexOf("0") > -1 || digits.indexOf("1") > -1) return new ArrayList<String>();
+
+		List<String> result = new ArrayList<>();
+		Map<String, char[]> m = new HashMap<String, char[]>();
+
+		m.put("2", "abc".toCharArray());
+		m.put("3", "def".toCharArray());
+		m.put("4", "ghi".toCharArray());
+		m.put("5", "jkl".toCharArray());
+		m.put("6", "mno".toCharArray());
+		m.put("7", "pqrs".toCharArray());
+		m.put("8", "tuv".toCharArray());
+		m.put("9", "wxyz".toCharArray());
+
+		int start = 0;
+		int len = digits.length();
+		while(result.size() == 0 || result.get(0).length() < len){
+			char[] key = m.get(digits.substring(start,start+1)); //
+
+			String prefix = "";
+			if(result.size() > 0 && result.get(0).length() < start+1){
+				prefix = result.get(0);
+				result.remove(0);
+			}
+			for(int i=0;i<key.length;i++){
+				result.add(prefix+key[i]);
+			}
+			if(result.get(0).length() == start+1) start++;
+		}
+
+
+		return result;
+	}
 	public static List<String> letterCombinations2(String digits) {
 
 		if(digits.isEmpty() || digits.indexOf("0") > -1 || digits.indexOf("1") > -1) return new ArrayList<String>();
