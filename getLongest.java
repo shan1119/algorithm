@@ -17,10 +17,12 @@ public class getLongest {
                 day[i] -= Integer.parseInt(str.substring(i-7,i-6));;
             }
 
+            // continuous works day increatment
             if(day[i] < 6){
                 current ++;
                 if(current > max) max = current;
             }else{
+                // reset continuous works day
                 current = 6;
             }
         }
